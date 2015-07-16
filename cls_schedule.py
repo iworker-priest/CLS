@@ -20,21 +20,21 @@ class CSLSCHEDULE(object):
         return page
 
     def get_table_line(self, page):
-        soup = BeautifulSoup(page, "lxml")
+        soup = BeautifulSoup(page)
         return soup.find_all('tr', class_=re.compile("even|odd"))
 
     def get_game_time(self, page):
-        soup = BeautifulSoup(page, "lxml")
+        soup = BeautifulSoup(page)
         day  = soup.find('td', class_="w96")
         time = soup.find('td', attrs=None)
         return day.string + ' ' + time.string 
 
     def get_game_result(self, page):
-        soup = BeautifulSoup(page, "lxml")
+        soup = BeautifulSoup(page)
         res = soup.find_all('td', class_="f_green")
-        zhudui = BeautifulSoup(str(res[0]), "lxml").find('a').string
-        kedui  = BeautifulSoup(str(res[2]), "lxml").find('a').string
-        befin  = BeautifulSoup(str(res[1]), "lxml").find('a')
+        zhudui = BeautifulSoup(str(res[0])).find('a').string
+        kedui  = BeautifulSoup(str(res[2])).find('a').string
+        befin  = BeautifulSoup(str(res[1])).find('a')
         if not befin:
             befin = " - "
         else:
@@ -47,7 +47,7 @@ if __name__ == "__main__":
     page = csl_sch.get_page(2015, 19)
     lines = csl_sch.get_table_line(page)
 
-    len_lines = len(len_lines)
+    len_lines = len(lines)
     result = []
 
     for i in range(len_lines):
