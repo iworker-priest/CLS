@@ -6,13 +6,14 @@ import alfred
 from bs4 import BeautifulSoup
 
 class CSLSCHEDULE(object):
-    base_url = "http://csldata.sports.sohu.com/zsc.php?season={season}&type=R&round={round}"
+    base_url = "http://csldata.sports.sohu.com/zsc.php"
+    # ?season={season}&type=R&round={round}
 
     def get_page(self, season, round):
         user_agent = 'Mozilla/4.0 (compatible; MSIE 5.5; Windows NT)'
         headers    = {'User-Agent' : user_agent}
         req = urllib2.Request(
-                CSLSCHEDULE.base_url.format(season=season, round=round),
+                CSLSCHEDULE.base_url,
                 headers= headers
             )
         page = urllib2.urlopen(req).read()
